@@ -11,7 +11,7 @@ class Matrix
         previous = @head
 
         nRows.times do |i|
-            temp = Element.new i, -1, 0
+            temp = Element.new i+1, -1, 0
             temp.below = previous.below
             previous.below = temp
             previous = temp
@@ -19,7 +19,7 @@ class Matrix
 
         previous = @head
         nCols.times do |i|
-            temp = Element.new -1, i, 0
+            temp = Element.new -1, i+1, 0
             temp.right = previous.right
             previous.right = temp
             previous = temp
@@ -32,12 +32,12 @@ class Matrix
         search = @head.below
 
         ##Search the position by rows###############
-        while search.below != @head && search.row < row
+        while search != @head && search.row < row
             search = search.below
         end
         rowHead = search
         previous = search
-        while search.right != rowHead && search.col < col
+        while search != rowHead && search.col < col
              previous = search
              search = search.right
         end
@@ -46,12 +46,12 @@ class Matrix
 
         ##Link the columns######################
         search = @head.right
-        while search.right != @head && search.col < col
+        while search != @head && search.col < col
             search = search.right
         end
         colHead = search
         previous = search
-        while search.below != colHead && search.row < row
+        while search != colHead && search.row < row
             previous = search
             search = search.below
         end
@@ -65,15 +65,15 @@ class Matrix
         while search.row < row
             search = search.below
         end
-        previous = search
-        while search.right != @head && search.col < col
-            previous = search
+        rowHead = search
+        search = search.right
+        while search != @rowHead && search.col < col
             search = search.right
         end
-        if (search.row == row && search.col == col)
+        if search.col == col
             return search
         end
-        return nil
+        puts "Elemento não encontrado"
     end
 
 
@@ -90,6 +90,35 @@ class Matrix
             end
             puts
             colHead = colHead.below
+        end
+    end
+
+    def printStructure
+        search = @head.right
+        print "                        "
+        while search != @head do
+            print "#{search.data} (#{search.showCoordinates}) "
+            search = search.right
+        end
+        puts
+        search = @head.below
+        while search != @head do
+            puts "#{search.data} (#{search.showCoordinates}) "
+            search = search.below
+        end
+    end
+
+    def printAll
+        rowHead = @head.below
+        search = rowHead.right
+        while rowHead != @head do
+            search = rowHead.right
+            while search != rowHead do
+                print "#{search.data} (#{search.showCoordinates}) "
+                search = search.right
+            end
+            puts
+            rowHead = rowHead.below
         end
     end
 
