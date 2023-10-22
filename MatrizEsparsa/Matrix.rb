@@ -139,7 +139,7 @@ class Matrix
     #############################operators#######################
 
     def sum m2
-        if @sizeRows != m2.sizeRows || @sizeCols != m2.sizeRows
+        if @sizeRows != m2.sizeRows || @sizeCols != m2.sizeCols
             puts "The matrix has different sizes, impossible to operate them by sum."
             return nil
         end
@@ -148,7 +148,9 @@ class Matrix
             @sizeCols.times do |j|
                 op1 = self.getElement(i+1, j+1).data
                 op2 = m2.getElement(i+1, j+1).data
-                temp.setElement(i+1, j+1, op1 + op2)
+                if (op1 + op2 != 0)
+                    temp.setElement(i+1, j+1, op1 + op2)
+                end
             end
         end
         return temp
@@ -163,6 +165,30 @@ class Matrix
         end
         return temp
     end
+
+    def multiply m2
+        if @sizeRows != m2.sizeCols || @sizeCols != m2.sizeRows
+            puts "The matrix has different sizes, impossible to operate them by multiplication."
+            return nil
+        end
+        temp = Matrix.new @sizeRows, m2.sizeCols
+        @sizeRows.times do |i|
+            m2.sizeCols.times do |j|
+                @sizeCols.times do |k|
+                    if temp.getElement(i+1, j+1) == nil
+                        acc = 0
+                    else
+                        acc = temp.getElement(i+1, j+1).data
+                    end
+                    if acc != 0 || (self.getElement(i+1, k+1).data != 0 && m2.getElement(k+1, j+1).data != 0)
+                        temp.setElement(i+1, j+1, (acc + (self.getElement(i+1, k+1).data * m2.getElement(k+1, j+1).data)))
+                    end
+                end
+            end
+        end
+        return temp
+    end
+
 
     #############################suport##########################
 
