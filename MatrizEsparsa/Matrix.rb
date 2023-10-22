@@ -36,7 +36,8 @@ class Matrix
             search = search.below
         end
         rowHead = search
-        previous = search
+        search = search.right
+        previous = rowHead
         while search != rowHead && search.col < col
              previous = search
              search = search.right
