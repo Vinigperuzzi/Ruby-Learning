@@ -140,7 +140,7 @@ class Matrix
 
     def sum m2
         if @sizeRows != m2.sizeRows || @sizeCols != m2.sizeRows
-            puts "The matrix has different sizes, impossible to operate them by sum"
+            puts "The matrix has different sizes, impossible to operate them by sum."
             return nil
         end
         temp = Matrix.new @sizeRows, @sizeCols
@@ -169,7 +169,7 @@ class Matrix
     def checkSize n1, n2, param = false
         if n1 > @sizeRows || n2 > @sizeCols
             if param == true
-                puts "Coordinates given as parameter are bigger than matrix size"
+                puts "Coordinates given as parameter are bigger than matrix size."
             end
             return false
         end

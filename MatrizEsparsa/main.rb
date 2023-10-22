@@ -67,6 +67,8 @@ def teste4 n1, n2
     m1.printMatrix
     puts "Imprimindo a matriz 2:"
     m2.printMatrix
+
+    m3 = m1.sum m2
 end
 
 def main
