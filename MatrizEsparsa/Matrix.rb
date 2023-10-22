@@ -26,8 +26,18 @@ class Matrix
         end
     end
 
-    def setElement row, col, data
+    #############################getter and setter#######################
 
+    def setElement row, col, data
+        if checkSize(row, col, true) != true
+            return nil
+        end
+
+        testElement = self.getElement row, col
+        if testElement != nil
+            testElement.data = data
+            return
+        end
         newElem = Element.new row, col, data
         search = @head.below
 
@@ -62,39 +72,42 @@ class Matrix
 
 
     def getElement row, col
+        if checkSize(row, col, true) != true
+            return nil
+        end
         search = @head.below
         while search.row < row
             search = search.below
         end
         rowHead = search
         search = search.right
-        while search != @rowHead && search.col < col
+        while search != rowHead && search.col < col
             search = search.right
         end
         if search.col == col
             return search
         end
-        puts "Elemento não encontrado"
+        return nil
     end
 
 
+    #############################prints#######################
 
     def printMatrix
-        colHead = @head.below
-        while colHead.below != @head
-            search = colHead.right
-            while search.right != colHead
-                row = search.row
-                col = search.col
-                print "#{self.getElement(row, col).data} "
-                search = search.right
+        (@sizeRows).times do |i|
+            (@sizeCols).times do |j|
+                temp = self.getElement(i+1, j+1)
+                if temp == nil
+                    print "00  "
+                else
+                    print "#{sprintf('%02d', temp.data)}  "
+                end
             end
             puts
-            colHead = colHead.below
         end
     end
 
-    def printStructure
+    def printHeader
         search = @head.right
         print "                        "
         while search != @head do
@@ -121,6 +134,46 @@ class Matrix
             puts
             rowHead = rowHead.below
         end
+    end
+
+    #############################operators#######################
+
+    def sum m2
+        if @sizeRows != m2.sizeRows || @sizeCols != m2.sizeRows
+            puts "The matrix has different sizes, impossible to operate them by sum"
+            return nil
+        end
+        temp = Matrix.new @sizeRows, @sizeCols
+        @sizeRows.times do |i|
+            @sizeCols.times do |j|
+                op1 = self.getElement(i+1, j+1).data
+                op2 = m2.getElement(i+1, j+1).data
+                temp.setElement(i+1, j+1, op1 + op2)
+            end
+        end
+        return temp
+    end
+
+    def transpose
+        temp = Matrix.new @sizeCols, @sizeRows
+        @sizeRows.times do |i|
+            @sizeCols.times do |j|
+                temp.setElement(j+1, i+1, self.getElement(i+1, j+1).data)
+            end
+        end
+        return temp
+    end
+
+    #############################suport##########################
+
+    def checkSize n1, n2, param = false
+        if n1 > @sizeRows || n2 > @sizeCols
+            if param == true
+                puts "Coordinates given as parameter are bigger than matrix size"
+            end
+            return false
+        end
+        return true
     end
 
 end
