@@ -1,6 +1,14 @@
-# Ruby-Learning
-Repository for the codes in the process of learning ruby and ruby on rails
--------------------------------------------------------------------------------------------------
-In the subdirectory named as "MatrizEsparsa" has the code for an ADT (Abstract Type of Data) for manipulation of sparse matrix.
-This kind os matrix has its own properties, but its principal feature is being composed by a large amount of zeroes. Therefore, is not wise make a whole structure of elements to contain no data. For this problem, you can make a kind of linked lists, in what each element links to its next element. Those elements who have no data, you simply do not save them, all the others has its data, row and column index.
-It was the work of algorithms and data structure I from UFPel on the semester of 2023/1, in which i was the monitor. The students should implemented it in the C language, what i has done myself, but now i desired to do it in the Ruby language that impressed me so much from the very beggining.
+# Ruby-Learning Repository 🚀💎
+This repository captures my journey in learning Ruby and Ruby on Rails. Dive into the world of Ruby programming and explore various projects as I master the language.
+
+## Notable Project: MatrizEsparsa
+Within the "MatrizEsparsa" subdirectory, you'll find an implementation of an Abstract Data Type (ADT) for manipulating sparse matrices. Sparse matrices, known for their abundance of zeroes, pose a challenge in terms of storage efficiency. The solution involves a linked list structure, where each element links to its next, omitting elements with no data. Each retained element holds its data along with row and column indices.
+
+## Project Background
+Originally part of the Algorithms and Data Structures I course at UFPel during the semester of 2023/1, this project was completed under my supervision as a monitor. While students implemented it in the C language, I've taken the initiative to reimplement it in the Ruby language, which has captivated me since the beginning of my coding journey.
+
+Explore the intricacies of this project and witness the versatility of Ruby in solving complex problems with elegance.
+
+Happy coding! 🌐💻
+
+### Vinigperuzzi
